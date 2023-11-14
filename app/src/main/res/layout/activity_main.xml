@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008"
-        app:srcCompat="@drawable/check_mark_icon_transparent_background_checkmark_icon_approved_symbol_confirmation_sign_design_elements_checklist_positive_thinking_sign_correct_answer_verified_badge_flat_icon_png" />
+        app:srcCompat="@drawable/check_mark" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
