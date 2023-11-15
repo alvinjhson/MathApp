@@ -1,7 +1,6 @@
 package com.example.simplemathapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +11,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var rightAnswers : TextView
@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var answerView: EditText
     var correctAnswer: Int = 0
     var rightAnswerCount = 0
-    val math = arrayOf("Minus","Addition","Multiplication","Divided")
+    val math = arrayOf("Minus","Addition","Multiplication","Division")
     var mathPosistion = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val spinner = findViewById<Spinner>(R.id.spinner)
+
 
         questionView = findViewById(R.id.questionView)
         answerView = findViewById(R.id.answerView)
@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.answerButton)
 
 
-        val arrayAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,math)
+        val arrayAdapter = ArrayAdapter<String>(this,R.layout.spinner_list,math)
         spinner.adapter = arrayAdapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                Toast.makeText(applicationContext,"selected Math language is = "+ math[p2], Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Selected Math is "+ math[p2], Toast.LENGTH_SHORT).show()
                 Log.d("!!!","this item ${math[p2]} ")
                 if (math[p2] == math[0]){
                     setNewQuestionMinus()
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                     mathPosistion = 2
                 }
                 else if (math[p2] == math[3]){
-                    setNewQuestionDivided()
+                    setNewQuestionDivision()
                     mathPosistion = 3
                 }
 
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             setNewQuestionMultiplication()
         }
         else if (mathPosistion == 3){
-            setNewQuestionDivided()
+            setNewQuestionDivision()
         }
     }
     fun handleAnswer(){
@@ -127,29 +127,29 @@ class MainActivity : AppCompatActivity() {
         val secondNumber = (1.. 10).random()
         correctAnswer = firstNumber + secondNumber
 
-        questionView.text = "$firstNumber + $secondNumber ="
+        questionView.text = "$firstNumber + $secondNumber = ?"
 
     }
     fun setNewQuestionMinus(){
-        val firstNumber = (20..50).random()
-        val secondNumber = (1.. 19).random()
+        val firstNumber = (11..25).random()
+        val secondNumber = (1.. 10).random()
         correctAnswer = firstNumber - secondNumber
-        questionView.text = "$firstNumber - $secondNumber ="
+        questionView.text = "$firstNumber - $secondNumber = ?"
     }
     fun setNewQuestionMultiplication() {
         val firstNumber = (1.. 10).random()
         val secondNumber = (1.. 10).random()
         correctAnswer = firstNumber * secondNumber
 
-        questionView.text = "$firstNumber * $secondNumber ="
+        questionView.text = "$firstNumber * $secondNumber = ?"
 
     }
-    fun setNewQuestionDivided() {
-        val firstNumber = (20.. 100).random()
-        val secondNumber = (1.. 19).random()
+    fun setNewQuestionDivision() {
+        val firstNumber = (10.. 40).random()
+        val secondNumber = (1.. 5).random()
         correctAnswer = firstNumber / secondNumber
 
-        questionView.text = "$firstNumber / $secondNumber ="
+        questionView.text = "$firstNumber / $secondNumber = ?"
 
     }
 }
