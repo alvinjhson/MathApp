@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     val difficulty = arrayOf("Easy","Medium","Hard")
     var mathPosistion = 0
     var mathDifficulty = 0
+    //test
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
