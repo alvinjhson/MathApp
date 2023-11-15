@@ -22,10 +22,10 @@ class AnswerActivity : AppCompatActivity() {
         val answer = intent.getBooleanExtra("answeredCorrect", false)
 
         if (answer){
-            resultView.text = "Rätt svar"
+            resultView.text = getString(R.string.result)
 
         }else
-            resultView.text = "fel svar"
+            resultView.text = getString(R.string.resultWrong)
 
     }
 

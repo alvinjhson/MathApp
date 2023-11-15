@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleMathApp</string>
+    <string name="answer">Svar</string>
+    <string name="button">Infoga svar</string>
+    <string name="result">Rätt svar</string>
+    <string name="resultWrong">Fel svar</string>
+
+</resources>
