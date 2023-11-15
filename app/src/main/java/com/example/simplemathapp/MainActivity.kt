@@ -20,12 +20,15 @@ class MainActivity : AppCompatActivity() {
     var correctAnswer: Int = 0
     var rightAnswerCount = 0
     val math = arrayOf("Minus","Addition","Multiplication","Division")
+    val difficulty = arrayOf("Easy","Medium","Hard")
     var mathPosistion = 0
+    var mathDifficulty = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val spinner = findViewById<Spinner>(R.id.spinner)
+        val difficultySpiner = findViewById<Spinner>(R.id.spinner2)
 
 
         questionView = findViewById(R.id.questionView)
@@ -33,6 +36,29 @@ class MainActivity : AppCompatActivity() {
         rightAnswers = findViewById(R.id.rigthAnswers)
         val button = findViewById<Button>(R.id.answerButton)
 
+        val arrayAdapterDif = ArrayAdapter<String>(this,R.layout.spinner_dropdown,difficulty)
+        difficultySpiner.adapter = arrayAdapterDif
+        difficultySpiner.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                Toast.makeText(applicationContext,"Selected difficulty is "+ difficulty[p2], Toast.LENGTH_SHORT).show()
+                if (difficulty[p2] == difficulty[0]){
+                    mathDifficulty = 0
+                    checkMath()
+                }else if (difficulty[p2] == difficulty[1]){
+                    mathDifficulty = 1
+                    checkMath()
+                }
+                else if (difficulty[p2] == difficulty[2]){
+                    mathDifficulty = 2
+                    checkMath()
+                }
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
 
         val arrayAdapter = ArrayAdapter<String>(this,R.layout.spinner_list,math)
         spinner.adapter = arrayAdapter
@@ -43,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 if (math[p2] == math[0]){
                     setNewQuestionMinus()
                     mathPosistion = 0
+
                 }
                 else if (math[p2] == math[1]){
                     setNewQuestionAddition()
@@ -123,33 +150,89 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setNewQuestionAddition() {
-        val firstNumber = (1.. 10).random()
-        val secondNumber = (1.. 10).random()
-        correctAnswer = firstNumber + secondNumber
-
-        questionView.text = "$firstNumber + $secondNumber = ?"
-
+        if (mathDifficulty == 0){
+            val firstNumber = (1.. 10).random()
+            val secondNumber = (1.. 10).random()
+            correctAnswer = firstNumber + secondNumber
+            questionView.text = "$firstNumber + $secondNumber = ?"
+        }else if(mathDifficulty == 1){
+            val firstNumber = (10.. 50).random()
+            val secondNumber = (10.. 50).random()
+            correctAnswer = firstNumber + secondNumber
+            questionView.text = "$firstNumber + $secondNumber = ?"
+        }
+        else if(mathDifficulty == 2){
+            val firstNumber = (50.. 150).random()
+            val secondNumber = (50.. 150).random()
+            correctAnswer = firstNumber + secondNumber
+            questionView.text = "$firstNumber + $secondNumber = ?"
+        }
     }
     fun setNewQuestionMinus(){
-        val firstNumber = (11..25).random()
-        val secondNumber = (1.. 10).random()
-        correctAnswer = firstNumber - secondNumber
-        questionView.text = "$firstNumber - $secondNumber = ?"
+        if (mathDifficulty == 0){
+            val firstNumber = (11.. 25).random()
+            val secondNumber = (1.. 10).random()
+            correctAnswer = firstNumber - secondNumber
+            questionView.text = "$firstNumber - $secondNumber = ?"
+        }else if(mathDifficulty == 1){
+            val firstNumber = (50.. 100).random()
+            val secondNumber = (7.. 30).random()
+            correctAnswer = firstNumber - secondNumber
+            questionView.text = "$firstNumber - $secondNumber = ?"
+        }
+        else if(mathDifficulty == 2){
+            val firstNumber = (70.. 300).random()
+            val secondNumber = (10.. 69).random()
+            correctAnswer = firstNumber - secondNumber
+            questionView.text = "$firstNumber - $secondNumber = ?"
+        }
     }
     fun setNewQuestionMultiplication() {
-        val firstNumber = (1.. 10).random()
-        val secondNumber = (1.. 10).random()
-        correctAnswer = firstNumber * secondNumber
-
-        questionView.text = "$firstNumber * $secondNumber = ?"
+        if (mathDifficulty == 0){
+            val firstNumber = (1.. 10).random()
+            val secondNumber = (1.. 10).random()
+            correctAnswer = firstNumber * secondNumber
+            questionView.text = "$firstNumber * $secondNumber = ?"
+        }else if(mathDifficulty == 1){
+            val firstNumber = (10.. 25).random()
+            val secondNumber = (10.. 25).random()
+            correctAnswer = firstNumber * secondNumber
+            questionView.text = "$firstNumber * $secondNumber = ?"
+        }
+        else if(mathDifficulty == 2){
+            val firstNumber = (10.. 50).random()
+            val secondNumber = (10.. 50).random()
+            correctAnswer = firstNumber * secondNumber
+            questionView.text = "$firstNumber * $secondNumber = ?"
+        }
 
     }
     fun setNewQuestionDivision() {
-        val firstNumber = (10.. 40).random()
-        val secondNumber = (1.. 5).random()
-        correctAnswer = firstNumber / secondNumber
-
-        questionView.text = "$firstNumber / $secondNumber = ?"
-
+        if (mathDifficulty == 0){
+            val firstNumber = (10.. 20).random()
+            val secondNumber = (1.. 5).random()
+            correctAnswer = firstNumber / secondNumber
+            questionView.text = "$firstNumber / $secondNumber = ?"
+        }else if(mathDifficulty == 1){
+            val firstNumber = (20.. 50).random()
+            val secondNumber = (5.. 12).random()
+            correctAnswer = firstNumber / secondNumber
+            questionView.text = "$firstNumber / $secondNumber = ?"
+        }
+        else if(mathDifficulty == 2){
+            val firstNumber = (50.. 100).random()
+            val secondNumber = (10.. 25).random()
+            correctAnswer = firstNumber / secondNumber
+            questionView.text = "$firstNumber / $secondNumber = ?"
+        }
+    }
+    fun checkMath(){
+        if (mathPosistion == 1){
+            setNewQuestionAddition()
+        }else if (mathPosistion == 0){
+            setNewQuestionMinus()
+        }else if (mathPosistion == 2){
+            setNewQuestionMultiplication()
+        }else setNewQuestionDivision()
     }
 }

@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/questionView"
-        android:layout_width="130dp"
-        android:layout_height="42dp"
+        android:layout_width="216dp"
+        android:layout_height="43dp"
         android:layout_marginTop="200dp"
         android:text="TextView"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,6 +78,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008"
         app:srcCompat="@drawable/check_mark" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="235dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

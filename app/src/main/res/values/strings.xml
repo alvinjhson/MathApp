@@ -4,5 +4,6 @@
     <string name="button">Insert Answer</string>
     <string name="result">Right Answer</string>
     <string name="resultWrong">Wrong Answer</string>
+    <string name="button2">Back</string>
 
 </resources>
