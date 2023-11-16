@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     val difficulty = arrayOf("Easy","Medium","Hard")
     var mathPosistion = 0
     var mathDifficulty = 0
+
     
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +34,14 @@ class MainActivity : AppCompatActivity() {
 
 
         questionView = findViewById(R.id.questionView)
-        answerView = findViewById(R.id.answerView)
+       // answerView = findViewById(R.id.answerView)
         rightAnswers = findViewById(R.id.rigthAnswers)
-        val button = findViewById<Button>(R.id.answerButton)
+        //val button = findViewById<Button>(R.id.answerButton)
+        val anwBt1 = findViewById<Button>(R.id.anw_bt1)
+        val anwBt2 = findViewById<Button>(R.id.anw_bt2)
+        val anwBt3 = findViewById<Button>(R.id.anw_bt3)
+        val anwBt4 = findViewById<Button>(R.id.anw_bt4)
+       
 
         val arrayAdapterDif = ArrayAdapter<String>(this,R.layout.spinner_dropdown,difficulty)
         difficultySpiner.adapter = arrayAdapterDif
@@ -45,13 +51,16 @@ class MainActivity : AppCompatActivity() {
                 if (difficulty[p2] == difficulty[0]){
                     mathDifficulty = 0
                     checkMath()
+
                 }else if (difficulty[p2] == difficulty[1]){
                     mathDifficulty = 1
                     checkMath()
+
                 }
                 else if (difficulty[p2] == difficulty[2]){
                     mathDifficulty = 2
                     checkMath()
+
                 }
 
             }
@@ -95,17 +104,43 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        button.setOnClickListener {
+
+        anwBt1.setOnClickListener {
+            anwBt1.isSelected = true
+            anwBt2.isSelected = false
+            anwBt3.isSelected = false
+            anwBt4.isSelected = false
+
+            handleAnswer()
+        }
+        anwBt2.setOnClickListener {
+            anwBt1.isSelected = false
+            anwBt2.isSelected = true
+            anwBt3.isSelected = false
+            anwBt4.isSelected = false
+
+            handleAnswer()
+        }
+
+        anwBt3.setOnClickListener {
+            anwBt1.isSelected = false
+            anwBt2.isSelected = false
+            anwBt3.isSelected = true
+            anwBt4.isSelected = false
+
+            handleAnswer()
+        }
+
+        anwBt4.setOnClickListener {
+            anwBt1.isSelected = false
+            anwBt2.isSelected = false
+            anwBt3.isSelected = false
+            anwBt4.isSelected = true
             handleAnswer()
 
         }
 
-
-
-
-
-
-
+        
     }
 
     override fun onResume(){
@@ -124,7 +159,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun handleAnswer(){
-        val answerCorrect = checkAnswer()
+        val answerCorrect = checkAnswerAlternative()
         Log.d("!!!","Du svarade $answerCorrect")
         val intent = Intent(this,AnswerActivity::class.java)
         intent.putExtra("answeredCorrect",answerCorrect)
@@ -141,16 +176,30 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun checkAnswer() : Boolean{
-        val answerText = answerView.text.toString()
-        val answer = answerText.toIntOrNull()
+    fun checkAnswer(answer: String): Boolean {
+        Log.d("!!!", "value is ${answer}")
+        val answers = answer.toIntOrNull()
+        return answers == correctAnswer
 
-        return answer == correctAnswer
+    }
+    fun checkAnswerAlternative(): Boolean {
+        val anwBt1 = findViewById<Button>(R.id.anw_bt1)
+        val anwBt2 = findViewById<Button>(R.id.anw_bt2)
+        val anwBt3 = findViewById<Button>(R.id.anw_bt3)
+        val anwBt4 = findViewById<Button>(R.id.anw_bt4)
 
-
+        when {
+            anwBt1.isSelected -> return checkAnswer(anwBt1.text.toString())
+            anwBt2.isSelected-> return checkAnswer(anwBt2.text.toString())
+            anwBt3.isSelected -> return checkAnswer(anwBt3.text.toString())
+            anwBt4.isSelected -> return checkAnswer(anwBt4.text.toString())
+            else -> return false
+        }
+        
     }
 
     fun setNewQuestionAddition() {
+
         if (mathDifficulty == 0){
             val firstNumber = (1.. 10).random()
             val secondNumber = (1.. 10).random()
@@ -168,6 +217,7 @@ class MainActivity : AppCompatActivity() {
             correctAnswer = firstNumber + secondNumber
             questionView.text = "$firstNumber + $secondNumber = ?"
         }
+        alternativeAnswers()
     }
     fun setNewQuestionMinus(){
         if (mathDifficulty == 0){
@@ -187,6 +237,7 @@ class MainActivity : AppCompatActivity() {
             correctAnswer = firstNumber - secondNumber
             questionView.text = "$firstNumber - $secondNumber = ?"
         }
+        alternativeAnswers()
     }
     fun setNewQuestionMultiplication() {
         if (mathDifficulty == 0){
@@ -201,24 +252,25 @@ class MainActivity : AppCompatActivity() {
             questionView.text = "$firstNumber * $secondNumber = ?"
         }
         else if(mathDifficulty == 2){
+            alternativeAnswers()
+            checkAnswerAlternative()
             val firstNumber = (10.. 50).random()
             val secondNumber = (10.. 50).random()
             correctAnswer = firstNumber * secondNumber
             questionView.text = "$firstNumber * $secondNumber = ?"
         }
+        alternativeAnswers()
 
     }
     fun setNewQuestionDivision() {
+
         if (mathDifficulty == 0) {
             var firstNumber = (10..20).random()
             var secondNumber = (1..5).random()
-
-            // Upprepa tills divisionen ger ett heltal
             while ( firstNumber %   secondNumber != 0) {
                  firstNumber = (10..20).random()
                  secondNumber = (1..5).random()
             }
-
             correctAnswer = firstNumber / secondNumber
             questionView.text = "$firstNumber / $secondNumber = ?"
         }
@@ -231,6 +283,7 @@ class MainActivity : AppCompatActivity() {
             }
             correctAnswer = firstNumber / secondNumber
             questionView.text = "$firstNumber / $secondNumber = ?"
+
         }
         else if(mathDifficulty == 2){
             var firstNumber = (50.. 100).random()
@@ -242,7 +295,28 @@ class MainActivity : AppCompatActivity() {
             correctAnswer = firstNumber / secondNumber
             questionView.text = "$firstNumber / $secondNumber = ?"
         }
+        alternativeAnswers()
     }
+    fun alternativeAnswers() {
+        val anwBt1 = findViewById<Button>(R.id.anw_bt1)
+        val anwBt2 = findViewById<Button>(R.id.anw_bt2)
+        val anwBt3 = findViewById<Button>(R.id.anw_bt3)
+        val anwBt4 = findViewById<Button>(R.id.anw_bt4)
+
+        val answers = listOf(correctAnswer, generateNearbyNumber(correctAnswer), generateNearbyNumber(correctAnswer), generateNearbyNumber(correctAnswer))
+
+        val shuffledAnswers = answers.shuffled()
+
+        anwBt1.text = shuffledAnswers[0].toString()
+        anwBt2.text = shuffledAnswers[1].toString()
+        anwBt3.text = shuffledAnswers[2].toString()
+        anwBt4.text = shuffledAnswers[3].toString()
+    }
+    fun generateNearbyNumber(base: Int): Int {
+        val range = (base - 5)..(base + 5) // change here how it should diff
+        return range.random()
+    }
+
     fun checkMath(){
         if (mathPosistion == 1){
             setNewQuestionAddition()

@@ -6,5 +6,6 @@
     <string name="result">Rätt svar</string>
     <string name="resultWrong">Fel svar</string>
     <string name="button2">Tillbaks</string>
+    <string name="textViwer">Välj rätt alternativ</string>
 
 </resources>

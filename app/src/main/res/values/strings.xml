@@ -5,5 +5,7 @@
     <string name="result">Right Answer</string>
     <string name="resultWrong">Wrong Answer</string>
     <string name="button2">Back</string>
+    <string name="textViwer"> Choose the right answer</string>
+
 
 </resources>
