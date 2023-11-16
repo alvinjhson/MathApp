@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     val difficulty = arrayOf("Easy","Medium","Hard")
     var mathPosistion = 0
     var mathDifficulty = 0
-    //test
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-           // setNewQuestion()
+
 
 
 
@@ -209,20 +209,36 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun setNewQuestionDivision() {
-        if (mathDifficulty == 0){
-            val firstNumber = (10.. 20).random()
-            val secondNumber = (1.. 5).random()
+        if (mathDifficulty == 0) {
+            var firstNumber = (10..20).random()
+            var secondNumber = (1..5).random()
+
+            // Upprepa tills divisionen ger ett heltal
+            while ( firstNumber %   secondNumber != 0) {
+                 firstNumber = (10..20).random()
+                 secondNumber = (1..5).random()
+            }
+
             correctAnswer = firstNumber / secondNumber
             questionView.text = "$firstNumber / $secondNumber = ?"
-        }else if(mathDifficulty == 1){
-            val firstNumber = (20.. 50).random()
-            val secondNumber = (5.. 12).random()
+        }
+        else if(mathDifficulty == 1){
+            var firstNumber = (20.. 50).random()
+            var secondNumber = (5.. 12).random()
+            while ( firstNumber % secondNumber != 0) {
+                firstNumber = (20..50).random()
+                secondNumber = (5..15).random()
+            }
             correctAnswer = firstNumber / secondNumber
             questionView.text = "$firstNumber / $secondNumber = ?"
         }
         else if(mathDifficulty == 2){
-            val firstNumber = (50.. 100).random()
-            val secondNumber = (10.. 25).random()
+            var firstNumber = (50.. 100).random()
+            var secondNumber = (10.. 25).random()
+            while ( firstNumber %   secondNumber != 0) {
+                firstNumber = (50..100).random()
+                secondNumber = (5..25).random()
+            }
             correctAnswer = firstNumber / secondNumber
             questionView.text = "$firstNumber / $secondNumber = ?"
         }
