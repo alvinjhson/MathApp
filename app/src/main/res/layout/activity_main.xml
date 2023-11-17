@@ -78,13 +78,17 @@
         android:background="@drawable/rectangle_background"
         android:text="Button"
         android:textColor="#FFFFFF"
+        android:textColorHighlight="#4CAF68"
+        android:textColorLink="#4CAF68"
         android:textSize="20dp"
+        app:iconTint="#A23333"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.696" />
+        app:layout_constraintVertical_bias="0.696"
+        app:rippleColor="#4CAF68" />
 
     <Button
         android:id="@+id/anw_bt2"
@@ -149,6 +153,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.29" />
+
+    <ProgressBar
+        android:id="@+id/progressTime"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="427dp"
+        android:layout_height="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.139" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

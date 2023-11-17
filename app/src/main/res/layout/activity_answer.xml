@@ -24,6 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
         android:text="@string/button2"
+        android:textColorHighlight="#A23636"
+        android:textColorLink="#9F4B4B"
+        android:background="#4CAF68"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultView" />
