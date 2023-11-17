@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                 if (math[p2] == math[0]){
                     setNewQuestionMinus()
                     mathPosistion = 0
-
                 }
                 else if (math[p2] == math[1]){
                     setNewQuestionAddition()
